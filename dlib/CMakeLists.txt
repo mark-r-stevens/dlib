@@ -56,6 +56,8 @@ endmacro()
 # or more other things which both depend on dlib. 
 if (NOT TARGET dlib)
 
+   message("DLIB_NO_GUI_SUPPORT_STR=${DLIB_NO_GUI_SUPPORT_STR}")
+   
    set (DLIB_ISO_CPP_ONLY_STR 
    "Enable this if you don't want to compile any non-ISO C++ code (i.e. you don't use any of the API Wrappers)" )
    set (DLIB_NO_GUI_SUPPORT_STR 
@@ -272,6 +274,7 @@ if (NOT TARGET dlib)
       endif () ##################################################################################
 
       if (NOT DLIB_NO_GUI_SUPPORT)
+            message("DLIB_NO_GUI_SUPPORT=${DLIB_NO_GUI_SUPPORT}")
          set(source_files ${source_files}
             gui_widgets/fonts.cpp
             gui_widgets/widgets.cpp
@@ -363,7 +366,7 @@ if (NOT TARGET dlib)
             set(CMAKE_REQUIRED_LIBRARIES ${JPEG_LIBRARY})
             CHECK_FUNCTION_EXISTS(jpeg_read_header LIBJPEG_IS_GOOD)
          endif()
-         if (JPEG_FOUND AND LIBJPEG_IS_GOOD AND NOT APPLE)
+         if (JPEG_FOUND AND LIBJPEG_IS_GOOD) # AND NOT APPLE)
             include_directories(${JPEG_INCLUDE_DIR})
             set (dlib_needed_libraries ${dlib_needed_libraries} ${JPEG_LIBRARY})
          else()
