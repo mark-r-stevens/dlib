@@ -20,8 +20,9 @@ find_library(cudnn cudnn
             ${CUDNN_LIBRARY_DIR}
     )
     
+mark_as_advanced(cudnn cudnn_include)
+    
 message (STATUS "CUDNN_PATH=${CUDNN_PATH}")
 message (STATUS "cudnn_include=${cudnn_include}")
 message (STATUS "cudnn=${cudnn}")
     
-mark_as_advanced(cudnn cudnn_include)
