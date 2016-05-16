@@ -56,12 +56,21 @@ endmacro()
 # or more other things which both depend on dlib. 
 if (NOT TARGET dlib)
 
-   message("DLIB_NO_GUI_SUPPORT_STR=${DLIB_NO_GUI_SUPPORT_STR}")
    
    set (DLIB_ISO_CPP_ONLY_STR 
-   "Enable this if you don't want to compile any non-ISO C++ code (i.e. you don't use any of the API Wrappers)" )
-   set (DLIB_NO_GUI_SUPPORT_STR 
-   "Enable this if you don't want to compile any of the dlib GUI code" )
+   "Enable this if you don't want to compile any non-ISO C++ code (i.e. you don't use any of the 
+   API Wrappers)" )
+   
+   set(DLIB_NO_GUI_SUPPORT_STR 
+       ON 
+       CACHE "Enable this if you don't want to compile any of the dlib GUI code" ON 
+       FORCE)
+
+   #set (DLIB_NO_GUI_SUPPORT_STR 
+   #"Enable this if you don't want to compile any of the dlib GUI code" )
+   
+   message("DLIB_NO_GUI_SUPPORT_STR=${DLIB_NO_GUI_SUPPORT_STR}")
+
    set (DLIB_ENABLE_STACK_TRACE_STR 
    "Enable this if you want to turn on the DLIB_STACK_TRACE macros" )
    set (DLIB_ENABLE_ASSERTS_STR 
