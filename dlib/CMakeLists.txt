@@ -61,16 +61,9 @@ if (NOT TARGET dlib)
    "Enable this if you don't want to compile any non-ISO C++ code (i.e. you don't use any of the 
    API Wrappers)" )
    
-   set(DLIB_NO_GUI_SUPPORT_STR 
-       ON 
-       CACHE "Enable this if you don't want to compile any of the dlib GUI code" ON 
-       FORCE)
-
-   #set (DLIB_NO_GUI_SUPPORT_STR 
-   #"Enable this if you don't want to compile any of the dlib GUI code" )
+   set (DLIB_NO_GUI_SUPPORT_STR 
+   "Enable this if you don't want to compile any of the dlib GUI code" )
    
-   message("DLIB_NO_GUI_SUPPORT_STR=${DLIB_NO_GUI_SUPPORT_STR}")
-
    set (DLIB_ENABLE_STACK_TRACE_STR 
    "Enable this if you want to turn on the DLIB_STACK_TRACE macros" )
    set (DLIB_ENABLE_ASSERTS_STR 
@@ -94,7 +87,12 @@ if (NOT TARGET dlib)
 
    option(DLIB_ISO_CPP_ONLY ${DLIB_ISO_CPP_ONLY_STR} OFF)
    toggle_preprocessor_switch(DLIB_ISO_CPP_ONLY)
-   option(DLIB_NO_GUI_SUPPORT ${DLIB_NO_GUI_SUPPORT_STR} OFF)
+   
+   # MRS Change to enable UI support to be turned off via command line
+   #
+   #option(DLIB_NO_GUI_SUPPORT ${DLIB_NO_GUI_SUPPORT_STR} OFF)
+   set(DLIB_NO_GUI_SUPPORT OFF CACHE STRING ${DLIB_NO_GUI_SUPPORT_STR} FORCE )
+
    toggle_preprocessor_switch(DLIB_NO_GUI_SUPPORT)
    option(DLIB_ENABLE_STACK_TRACE ${DLIB_ENABLE_STACK_TRACE_STR} OFF)
    toggle_preprocessor_switch(DLIB_ENABLE_STACK_TRACE)
