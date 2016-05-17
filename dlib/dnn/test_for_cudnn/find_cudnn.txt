@@ -4,6 +4,9 @@ message(STATUS "Looking for cuDNN install...")
 set(CUDNN_INCLUDE_DIR ${CUDNN_PATH}/include)
 set(CUDNN_LIBRARY_DIR ${CUDNN_PATH}/lib)
 
+message(STATUS "CUDNN_INCLUDE_DIR=${CUDNN_INCLUDE_DIR}")
+message(STATUS "CUDNN_LIBRARY_DIR=${CUDNN_LIBRARY_DIR}")
+
 # Look for cudnn, we will look in the same place as other CUDA
 # libraries and also a few other places as well.
 #

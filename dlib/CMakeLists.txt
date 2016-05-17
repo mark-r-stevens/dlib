@@ -91,9 +91,9 @@ if (NOT TARGET dlib)
    # MRS Change to enable UI support to be turned off via command line
    #
    #option(DLIB_NO_GUI_SUPPORT ${DLIB_NO_GUI_SUPPORT_STR} OFF)
-   set(DLIB_NO_GUI_SUPPORT OFF CACHE STRING ${DLIB_NO_GUI_SUPPORT_STR} FORCE )
+   #set(DLIB_NO_GUI_SUPPORT OFF CACHE STRING ${DLIB_NO_GUI_SUPPORT_STR})
+   #toggle_preprocessor_switch(DLIB_NO_GUI_SUPPORT)
 
-   toggle_preprocessor_switch(DLIB_NO_GUI_SUPPORT)
    option(DLIB_ENABLE_STACK_TRACE ${DLIB_ENABLE_STACK_TRACE_STR} OFF)
    toggle_preprocessor_switch(DLIB_ENABLE_STACK_TRACE)
 
@@ -214,8 +214,10 @@ if (NOT TARGET dlib)
          endif()
       elseif(APPLE) ############################################################################
          if (NOT DLIB_NO_GUI_SUPPORT)
+            message(STATUS "DLIB_NO_GUI_SUPPORT=${DLIB_NO_GUI_SUPPORT}")
             find_package(X11 QUIET)
             if (X11_FOUND)
+               message(STATUS "Found X11_INCLUDE_DIR=${X11_INCLUDE_DIR}")
                include_directories(${X11_INCLUDE_DIR})
                set (dlib_needed_libraries ${dlib_needed_libraries} ${X11_LIBRARIES})
             else()
@@ -473,8 +475,15 @@ if (NOT TARGET dlib)
 
          endif()
 
+         message(STATUS "CUDA_FOUND=${CUDA_FOUND}")
+         message(STATUS "cudnn=${cudnn}")
+         message(STATUS "cudnn_include=${cudnn_include}")
+         message(STATUS "COMPILER_CAN_DO_CPP_11=${COMPILER_CAN_DO_CPP_11}")
+         message(STATUS "cuda_test_compile_worked=${cuda_test_compile_worked}")
+         message(STATUS "cudnn_test_compile_worked=${cudnn_test_compile_worked}")
 
-         if (CUDA_FOUND AND cudnn AND cudnn_include AND COMPILER_CAN_DO_CPP_11 AND cuda_test_compile_worked AND cudnn_test_compile_worked)
+         if (CUDA_FOUND AND cudnn AND cudnn_include AND COMPILER_CAN_DO_CPP_11)
+         # AND cuda_test_compile_worked AND cudnn_test_compile_worked)
             set(source_files ${source_files} 
                dnn/cuda_dlib.cu 
                dnn/cudnn_dlibapi.cpp
